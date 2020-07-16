@@ -1,0 +1,7 @@
+name: Cite-chest
+author: MileKat
+main: fr.milekat.cite_chest.MainChest
+version: '1.0'
+api-version: '1.16'
+description: plugin cite au émeraudes par MileKat - gestion des box
+depend: [Cite-core]
