@@ -5,3 +5,10 @@ version: '1.0'
 api-version: '1.16'
 description: plugin cite au émeraudes par MileKat - gestion des box
 depend: [Cite-core]
+commands:
+  crate:
+    permission: modo.chest.command.crate.edit
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+  box:
+    permission: modo.chest.command.box.edit
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
