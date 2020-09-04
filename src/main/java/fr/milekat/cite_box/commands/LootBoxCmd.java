@@ -1,6 +1,7 @@
-package fr.milekat.cite_chest.commands;
+package fr.milekat.cite_box.commands;
 
-import fr.milekat.cite_chest.MainChest;
+import fr.milekat.cite_box.MainBox;
+import fr.milekat.cite_box.engines.NewDayUpdate;
 import fr.milekat.cite_core.MainCore;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -20,23 +21,27 @@ public class LootBoxCmd implements CommandExecutor {
             sendHelp((Player) sender);
             return true;
         }
-        if (args[1].length()<10) {
+        if (args[1].length() != 10) {
             sender.sendMessage(MainCore.prefixCmd + "§cMerci d'utiliser le format dd/mm/aaaa");
             return true;
         }
-        if (!MainChest.lootbox.containsKey(args[1])) {
-            Inventory box = Bukkit.createInventory(null,27,"Box du " + args[1]);
-            MainChest.lootbox.put(args[1], box);
+        if (args[0].equalsIgnoreCase("edit")) {
+            if (!MainBox.lootbox.containsKey(args[1])) {
+                Inventory box = Bukkit.createInventory(null, 27, "Box du " + args[1]);
+                MainBox.lootbox.put(args[1], box);
+            }
+            Inventory box = Bukkit.createInventory(null, 27, "§c[EDIT] §rbox du " + args[1]);
+            box.setContents(MainBox.lootbox.get(args[1]).getContents());
+            ((Player) sender).openInventory(box);
+        } else if (args[0].equalsIgnoreCase("forceday")) {
+            new NewDayUpdate().setChestDay(args[1]);
         }
-        Inventory box = Bukkit.createInventory(null,27,"§c[EDIT] §rbox du " + args[1]);
-        box.setContents(MainChest.lootbox.get(args[1]).getContents());
-        ((Player) sender).openInventory(box);
         return true;
     }
 
     /**
-     *      Envoie la liste d'help pour la commande /event au joueur qui exécute /event (Custom pour les modos)
-     * @param player joueur qui exécute /event
+     *      Envoie la liste d'help pour la commande /box au joueur qui exécute /box
+     * @param player joueur qui exécute /box
      */
     private void sendHelp(Player player){
         player.sendMessage(MainCore.prefixCmd + "§6Loot Box help !");

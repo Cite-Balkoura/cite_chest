@@ -1,14 +1,14 @@
-name: Cite-chest
+name: Cite-box
 author: MileKat
-main: fr.milekat.cite_chest.MainChest
+main: fr.milekat.cite_box.MainBox
 version: '1.0'
 api-version: '1.16'
 description: plugin cite au émeraudes par MileKat - gestion des box
 depend: [Cite-core]
 commands:
   crate:
-    permission: modo.chest.command.crate.edit
+    permission: modo.box.command.crate.edit
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
   box:
-    permission: modo.chest.command.box.edit
+    permission: modo.box.command.box.edit
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."

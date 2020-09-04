@@ -1,6 +1,6 @@
-package fr.milekat.cite_chest.events;
+package fr.milekat.cite_box.events;
 
-import fr.milekat.cite_chest.MainChest;
+import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_core.utils_tools.ItemSerial;
 import org.bukkit.Bukkit;
@@ -23,7 +23,7 @@ public class Load {
                 String date = q.getResultSet().getString("box_date");
                 Inventory box = Bukkit.createInventory(null,27,"Box du " + date);
                 box.setContents(ItemSerial.invFromBase64(q.getResultSet().getString("box_content")));
-                MainChest.lootbox.put(date,box);
+                MainBox.lootbox.put(date,box);
             }
             q.close();
         } catch (SQLException throwables) {

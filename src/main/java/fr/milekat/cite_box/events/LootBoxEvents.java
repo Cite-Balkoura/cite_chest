@@ -1,6 +1,6 @@
-package fr.milekat.cite_chest.events;
+package fr.milekat.cite_box.events;
 
-import fr.milekat.cite_chest.MainChest;
+import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_core.utils_tools.DateMilekat;
 import fr.milekat.cite_core.utils_tools.ItemSerial;
@@ -23,9 +23,9 @@ import java.sql.SQLException;
 
 public class LootBoxEvents implements Listener {
 
-    @EventHandler (priority = EventPriority.LOW)
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onOpenBox(PlayerInteractEvent event) {
-        if (event.getClickedBlock()==null || !event.getClickedBlock().getLocation().equals(MainChest.DAYCHEST)) return;
+        if (event.getClickedBlock()==null || !event.getClickedBlock().getLocation().equals(MainBox.DAYCHEST)) return;
         event.setCancelled(true);
         Inventory inventory = Bukkit.createInventory(null, 27,
                 "Box du " + DateMilekat.setDateNow().substring(0,10));
@@ -100,7 +100,7 @@ public class LootBoxEvents implements Listener {
             q.close();
             Inventory box = Bukkit.createInventory(null,27,"Box du " + date);
             box.setContents(event.getView().getTopInventory().getContents());
-            MainChest.lootbox.put(date, box);
+            MainBox.lootbox.put(date, box);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package fr.milekat.cite_chest.commands;
+package fr.milekat.cite_box.commands;
 
 import fr.milekat.cite_core.MainCore;
 import org.bukkit.command.Command;
