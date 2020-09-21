@@ -53,6 +53,5 @@ public class NewDayUpdate {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        MainCore.sendAnnonce("Coffre du jour mis à jour !");
     }
 }

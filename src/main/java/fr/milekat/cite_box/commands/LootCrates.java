@@ -1,6 +1,5 @@
 package fr.milekat.cite_box.commands;
 
-import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_libs.MainLibs;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,6 +13,7 @@ public class LootCrates implements CommandExecutor {
             sender.sendMessage(MainLibs.prefixConsole + "Commande à éffectuer en jeux.");
             return true;
         }
+        
         return true;
     }
 }

@@ -1,4 +1,4 @@
-package fr.milekat.cite_box.events;
+package fr.milekat.cite_box.utils;
 
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
