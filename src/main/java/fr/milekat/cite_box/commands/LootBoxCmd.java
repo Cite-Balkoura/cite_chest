@@ -3,6 +3,7 @@ package fr.milekat.cite_box.commands;
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_box.engines.NewDayUpdate;
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +15,7 @@ public class LootBoxCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MainCore.prefixConsole + "Commande à éffectuer en jeux.");
+            sender.sendMessage(MainLibs.prefixConsole + "Commande à éffectuer en jeux.");
             return true;
         }
         if (args.length!=2) {

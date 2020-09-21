@@ -2,7 +2,7 @@ package fr.milekat.cite_box.events;
 
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
-import fr.milekat.cite_core.utils_tools.ItemSerial;
+import fr.milekat.cite_libs.utils_tools.ItemSerial;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
@@ -16,7 +16,7 @@ public class Load {
      */
     public Load() {
         try {
-            Connection connection = MainCore.sql.getConnection();
+            Connection connection = MainCore.getSQL().getConnection();
             PreparedStatement q = connection.prepareStatement("SELECT * FROM `balkoura_box`");
             q.execute();
             while (q.getResultSet().next()) {

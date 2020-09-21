@@ -2,9 +2,9 @@ package fr.milekat.cite_box.events;
 
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
-import fr.milekat.cite_core.utils_tools.DateMilekat;
-import fr.milekat.cite_core.utils_tools.ItemSerial;
-import fr.milekat.cite_core.utils_tools.Tools;
+import fr.milekat.cite_libs.utils_tools.DateMilekat;
+import fr.milekat.cite_libs.utils_tools.ItemSerial;
+import fr.milekat.cite_libs.utils_tools.Tools;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -30,7 +30,7 @@ public class LootBoxEvents implements Listener {
         Inventory inventory = Bukkit.createInventory(null, 27,
                 "Box du " + DateMilekat.setDateNow().substring(0,10));
         try {
-            Connection connection = MainCore.sql.getConnection();
+            Connection connection = MainCore.getSQL().getConnection();
             PreparedStatement q = connection.prepareStatement("SELECT `daily_box` FROM `" + MainCore.SQLPREFIX +
                     "player` WHERE `uuid` = ?;");
             q.setString(1, event.getPlayer().getUniqueId().toString());
@@ -58,7 +58,7 @@ public class LootBoxEvents implements Listener {
             if (!event.getCursor().getType().equals(Material.AIR)) return;
             if (Tools.canStore(event.getWhoClicked().getInventory(),36,event.getCurrentItem(),1)){
                 try {
-                    Connection connection = MainCore.sql.getConnection();
+                    Connection connection = MainCore.getSQL().getConnection();
                     ItemStack item = event.getCurrentItem();
                     event.getView().setItem(event.getSlot(),null);
                     PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX + "player` " +
@@ -88,7 +88,7 @@ public class LootBoxEvents implements Listener {
         if (!event.getPlayer().hasPermission("modo.chest.command.box.edit")) return;
         if (event.getView().getTitle().length() < 28 || !event.getView().getTitle().startsWith("§c[EDIT] §rbox du ")) return;
         try {
-            Connection connection = MainCore.sql.getConnection();
+            Connection connection = MainCore.getSQL().getConnection();
             PreparedStatement q = connection.prepareStatement("INSERT INTO `balkoura_box`(`box_date`, `box_content`) " +
                     "VALUES (?,?) ON DUPLICATE KEY UPDATE `box_content` = ?;");
             String content = ItemSerial.invToBase64(event.getView().getTopInventory().getContents());
