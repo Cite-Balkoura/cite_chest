@@ -2,9 +2,12 @@ package fr.milekat.cite_box;
 
 import fr.milekat.cite_box.commands.LootCrates;
 import fr.milekat.cite_box.commands.LootBoxCmd;
+import fr.milekat.cite_box.commands.LootCratesTAB;
 import fr.milekat.cite_box.engines.NewDayUpdate;
 import fr.milekat.cite_box.events.LootBoxEvents;
+import fr.milekat.cite_box.events.OpenCrateEvent;
 import fr.milekat.cite_box.obj.Crate;
+import fr.milekat.cite_box.utils.CrateRegister;
 import fr.milekat.cite_box.utils.Load;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,6 +20,7 @@ import java.util.HashMap;
 public class MainBox extends JavaPlugin {
     public static Location DAYCHEST;
     public static Location CRATECHEST;
+    public static String prefixConsole = "[Balkoura-Chest-Crates]";
     public static HashMap<String, Inventory> lootbox = new HashMap<>();
     public static HashMap<Integer, Crate> crates = new HashMap<>();
     private BukkitTask newDayUpdate;
@@ -27,9 +31,15 @@ public class MainBox extends JavaPlugin {
         mainChest = this;
         DAYCHEST = new Location(Bukkit.getWorld("world"),26,99,18);
         CRATECHEST = new Location(Bukkit.getWorld("world"),-14,155,-8);
+        // Events
         getServer().getPluginManager().registerEvents(new LootBoxEvents(),this);
+        getServer().getPluginManager().registerEvents(new OpenCrateEvent(),this);
+        // Commandes
         getCommand("crate").setExecutor(new LootCrates());
         getCommand("box").setExecutor(new LootBoxCmd());
+        // Tab
+        getCommand("crate").setTabCompleter(new LootCratesTAB());
+        new CrateRegister();
         new Load();
         newDayUpdate = new NewDayUpdate().runTask();
     }

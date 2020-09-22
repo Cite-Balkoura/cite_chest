@@ -1,7 +1,7 @@
 package fr.milekat.cite_box.events;
 
 import fr.milekat.cite_box.MainBox;
-import fr.milekat.cite_box.utils.MainCratesGUI;
+import fr.milekat.cite_box.utils.GUI.MainCratesGUI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -12,6 +12,6 @@ public class OpenCrateEvent implements Listener {
     public void onOpenCrate(PlayerInteractEvent event) {
         if (event.getClickedBlock()==null || !event.getClickedBlock().getLocation().equals(MainBox.CRATECHEST)) return;
         event.setCancelled(true);
-        new MainCratesGUI().open(event.getPlayer());
+        new MainCratesGUI(event.getPlayer()).open(event.getPlayer());
     }
 }

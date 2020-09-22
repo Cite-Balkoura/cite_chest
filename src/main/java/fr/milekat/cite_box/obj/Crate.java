@@ -13,10 +13,11 @@ public class Crate {
     private final HashMap<ItemStack, Float> itemsLucks;
     private final int minItems;
     private final int maxItems;
-    private final Material displayItem;
+    private final ItemStack displayItem;
     private final int displaySlot;
 
-    public Crate(int id, String name, String description, float totalLuck, HashMap<ItemStack, Float> itemsLucks, int minItems, int maxItems, Material displayItem, int displaySlot) {
+    public Crate(int id, String name, String description, float totalLuck, HashMap<ItemStack, Float> itemsLucks,
+                 int minItems, int maxItems, ItemStack displayItem, int displaySlot) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -56,7 +57,7 @@ public class Crate {
         return maxItems;
     }
 
-    public Material getDisplayItem() {
+    public ItemStack getDisplayItem() {
         return displayItem;
     }
 
