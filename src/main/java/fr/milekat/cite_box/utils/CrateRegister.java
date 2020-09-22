@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class CrateRegister {
     public CrateRegister() {
@@ -22,20 +23,21 @@ public class CrateRegister {
             q.execute();
             while (q.getResultSet().next()) {
                 PreparedStatement q2 = connection.prepareStatement("SELECT * FROM `" + MainCore.SQLPREFIX +
-                        "crates_loots` NATURAL JOIN `balkoura_material_liste` WHERE `crate_id` = ?;");
+                        "crates_loots` NATURAL JOIN `balkoura_material_liste` WHERE `crate_id` = ? ORDER BY `luck` ASC;");
                 q2.setInt(1,q.getResultSet().getInt("crate_id"));
                 q2.execute();
-                float totalLuck = 0L;
-                HashMap<ItemStack, Float> itemsLucks = new HashMap<>();
+                int totalLuck = 0;
+                TreeMap<Integer, ItemStack> itemsLucks = new TreeMap<>();
                 while (q2.getResultSet().next()) {
                     if (q2.getResultSet().getString("material")==null) continue;
-                    itemsLucks.put(ItemParser.setItem(
+                    totalLuck += q2.getResultSet().getInt("luck");
+                    itemsLucks.put(totalLuck,
+                            ItemParser.setItem(
                             q2.getResultSet().getString("material"),
                             q2.getResultSet().getString("name"),
                             q2.getResultSet().getString("enchantment"),
-                            "Chance: " + q2.getResultSet().getFloat("luck") * 100 + "%",
-                            q2.getResultSet().getInt("item_amount")),
-                            q2.getResultSet().getFloat("luck"));
+                            setLore(q2.getResultSet().getInt("luck")),
+                            q2.getResultSet().getInt("item_amount")));
                 }
                 q2.close();
                 Material material = Material.getMaterial(q.getResultSet().getString("crate_display_item"));
@@ -74,5 +76,32 @@ public class CrateRegister {
         itemStack.addLore("§7Items mini: §e" + min)
                 .addLore("§7Items maxi: §a" + max);
         return itemStack.build();
+    }
+
+    private String setLore(int luck) {
+        String str = "Chance: " + luck + "%";
+        switch (luck) {
+            case 3: {
+                str += "%nl%§r§6§lLEGENDARY";
+                break;
+            }
+            case 5: {
+                str += "%nl%§r§5§lEPIC";
+                break;
+            }
+            case 7: {
+                str += "%nl%§r§b§lRARE";
+                break;
+            }
+            case 12: {
+                str += "%nl%§r§a§lCOMMUN";
+                break;
+            }
+            case 25: {
+                str += "%nl%§r§f§lNORMAUX";
+                break;
+            }
+        }
+        return str;
     }
 }

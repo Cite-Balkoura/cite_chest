@@ -8,9 +8,11 @@ import fr.milekat.cite_box.events.LootBoxEvents;
 import fr.milekat.cite_box.events.OpenCrateEvent;
 import fr.milekat.cite_box.obj.Crate;
 import fr.milekat.cite_box.utils.CrateRegister;
+import fr.milekat.cite_box.utils.GUI.CrateGUI;
 import fr.milekat.cite_box.utils.Load;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -18,6 +20,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 
 public class MainBox extends JavaPlugin {
+    public static World WORLD;
     public static Location DAYCHEST;
     public static Location CRATECHEST;
     public static String prefixConsole = "[Balkoura-Chest-Crates]";
@@ -29,11 +32,13 @@ public class MainBox extends JavaPlugin {
     @Override
     public void onEnable() {
         mainChest = this;
-        DAYCHEST = new Location(Bukkit.getWorld("world"),26,99,18);
-        CRATECHEST = new Location(Bukkit.getWorld("world"),-14,155,-8);
+        WORLD = Bukkit.getWorld("world");
+        DAYCHEST = new Location(WORLD,26,99,18);
+        CRATECHEST = new Location(WORLD,-14,155,-8);
         // Events
         getServer().getPluginManager().registerEvents(new LootBoxEvents(),this);
         getServer().getPluginManager().registerEvents(new OpenCrateEvent(),this);
+        getServer().getPluginManager().registerEvents(new CrateGUI(),this);
         // Commandes
         getCommand("crate").setExecutor(new LootCrates());
         getCommand("box").setExecutor(new LootBoxCmd());

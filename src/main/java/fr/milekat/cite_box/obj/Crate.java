@@ -1,22 +1,21 @@
 package fr.milekat.cite_box.obj;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Crate {
     private final int id;
     private final String name;
     private final String description;
-    private final float totalLuck;
-    private final HashMap<ItemStack, Float> itemsLucks;
+    private final long totalLuck;
+    private final TreeMap<Integer, ItemStack> itemsLucks;
     private final int minItems;
     private final int maxItems;
     private final ItemStack displayItem;
     private final int displaySlot;
 
-    public Crate(int id, String name, String description, float totalLuck, HashMap<ItemStack, Float> itemsLucks,
+    public Crate(int id, String name, String description, long totalLuck, TreeMap<Integer, ItemStack> itemsLucks,
                  int minItems, int maxItems, ItemStack displayItem, int displaySlot) {
         this.id = id;
         this.name = name;
@@ -41,11 +40,11 @@ public class Crate {
         return description;
     }
 
-    public float getTotalLuck() {
+    public long getTotalLuck() {
         return totalLuck;
     }
 
-    public HashMap<ItemStack, Float> getItemsLucks() {
+    public TreeMap<Integer, ItemStack> getItemsLucks() {
         return itemsLucks;
     }
 
