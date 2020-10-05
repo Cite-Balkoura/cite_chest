@@ -81,15 +81,15 @@ public class CrateRegister {
     private String setLore(int luck) {
         String str = "Chance: " + luck + "%";
         switch (luck) {
-            case 3: {
+            case 1: {
                 str += "%nl%§r§6§lLEGENDARY";
                 break;
             }
-            case 5: {
+            case 3: {
                 str += "%nl%§r§5§lEPIC";
                 break;
             }
-            case 7: {
+            case 5: {
                 str += "%nl%§r§b§lRARE";
                 break;
             }

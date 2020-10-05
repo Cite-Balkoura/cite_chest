@@ -48,7 +48,8 @@ public class CrateGUI implements Listener {
         for (int loop = 1; loop<=givedItems; loop++) {
             for (int slots=0; slots<35; slots++) {
                 if (crateInv.getItem(slots)!=null) continue;
-                crateInv.setItem(slots,crate.getItemsLucks().ceilingEntry(new Random().nextInt((int) crate.getTotalLuck())).getValue());
+                crateInv.setItem(
+                        slots,crate.getItemsLucks().ceilingEntry(new Random().nextInt((int) crate.getTotalLuck())).getValue());
                 break;
             }
         }
@@ -108,7 +109,8 @@ public class CrateGUI implements Listener {
                 profil.setCrates(crates);
                 try {
                     Connection connection = MainCore.getSQL().getConnection();
-                    PreparedStatement q = connection.prepareStatement("UPDATE `balkoura_player` SET `crates`=? WHERE `uuid` = ?;");
+                    PreparedStatement q = connection.prepareStatement(
+                            "UPDATE `balkoura_player` SET `crates`=? WHERE `uuid` = ?;");
                     StringBuilder stringBuilder = new StringBuilder();
                     for (Map.Entry<Integer, Integer> cratesloop: profil.getCrates().entrySet()) {
                         stringBuilder.append(cratesloop.getKey()).append(":").append(cratesloop.getValue()).append(";");
