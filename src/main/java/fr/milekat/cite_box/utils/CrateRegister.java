@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public class CrateRegister {
@@ -23,7 +22,8 @@ public class CrateRegister {
             q.execute();
             while (q.getResultSet().next()) {
                 PreparedStatement q2 = connection.prepareStatement("SELECT * FROM `" + MainCore.SQLPREFIX +
-                        "crates_loots` NATURAL JOIN `balkoura_material_liste` WHERE `crate_id` = ? ORDER BY `luck` ASC;");
+                        "crates_loots` NATURAL JOIN `" + MainCore.SQLPREFIX +
+                        "material_liste` WHERE `crate_id` = ? ORDER BY `luck` ASC;");
                 q2.setInt(1,q.getResultSet().getInt("crate_id"));
                 q2.execute();
                 int totalLuck = 0;
@@ -68,14 +68,14 @@ public class CrateRegister {
     }
 
     private ItemStack setDisplayItem(Material material, String name, String desc, int min, int max) {
-        ItemBuilder itemStack = new ItemBuilder(material).name("§7Box: §6" + name);
-        itemStack.addLore("§7Description:");
+        ItemBuilder itemBuilder = new ItemBuilder(material).name("§7Box: §6" + name);
+        itemBuilder.addLore("§7Description:");
         for (String line: desc.split("(?<=\\G.{25,}\\s)")) {
-            itemStack.addLore(ChatColor.translateAlternateColorCodes('&', line));
+            itemBuilder.addLore(ChatColor.translateAlternateColorCodes('&', line));
         }
-        itemStack.addLore("§7Items mini: §e" + min)
+        itemBuilder.addLore("§7Items mini: §e" + min)
                 .addLore("§7Items maxi: §a" + max);
-        return itemStack.build();
+        return itemBuilder.build();
     }
 
     private String setLore(int luck) {
