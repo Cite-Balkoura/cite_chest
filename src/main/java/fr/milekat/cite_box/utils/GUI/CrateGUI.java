@@ -95,7 +95,8 @@ public class CrateGUI implements Listener {
                 meta.setLore(null);
                 itemStack.setItemMeta(meta);
             }
-            MainBox.WORLD.dropItemNaturally(event.getPlayer().getLocation(),itemStack);
+            for (ItemStack todrop: event.getPlayer().getInventory().addItem(itemStack).values())
+                MainBox.WORLD.dropItemNaturally(event.getPlayer().getLocation(),todrop);
         }
     }
 
