@@ -6,9 +6,6 @@ api-version: '1.16'
 description: plugin cite au émeraudes par MileKat - gestion des box
 depend: [Cite-libs, Cite-core]
 commands:
-  crate:
-    permission: modo.box.command.crate.edit
-    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
   box:
     permission: modo.box.command.box.edit
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."

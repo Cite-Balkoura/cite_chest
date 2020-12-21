@@ -1,4 +1,4 @@
-package fr.milekat.cite_box.commands;
+package fr.milekat.cite_box.chests;
 
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_box.engines.NewDayUpdate;
@@ -9,7 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.Inventory;
 
 public class LootBoxCmd implements CommandExecutor {

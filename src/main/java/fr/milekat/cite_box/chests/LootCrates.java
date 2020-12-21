@@ -1,4 +1,4 @@
-package fr.milekat.cite_box.commands;
+package fr.milekat.cite_box.chests;
 
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
@@ -73,7 +73,7 @@ public class LootCrates implements CommandExecutor {
      */
     private void updateSQLCratesofPlayer(Profil profil) {
         try {
-            Connection connection = MainCore.getSQL().getConnection();
+            Connection connection = MainLibs.getSql();
             PreparedStatement q = connection.prepareStatement("UPDATE `balkoura_player` SET `crates`=? WHERE `uuid` = ?;");
             StringBuilder stringBuilder = new StringBuilder();
             for (Map.Entry<Integer, Integer> cratesloop: profil.getCrates().entrySet()) {

@@ -1,8 +1,8 @@
 package fr.milekat.cite_box;
 
-import fr.milekat.cite_box.commands.LootCrates;
-import fr.milekat.cite_box.commands.LootBoxCmd;
-import fr.milekat.cite_box.commands.LootCratesTAB;
+import fr.milekat.cite_box.chests.LootBoxCmd;
+import fr.milekat.cite_box.chests.LootCrates;
+import fr.milekat.cite_box.chests.LootCratesTAB;
 import fr.milekat.cite_box.engines.NewDayUpdate;
 import fr.milekat.cite_box.events.LootBoxEvents;
 import fr.milekat.cite_box.events.OpenCrateEvent;
@@ -33,17 +33,14 @@ public class MainBox extends JavaPlugin {
     public void onEnable() {
         mainChest = this;
         WORLD = Bukkit.getWorld("world");
-        DAYCHEST = new Location(WORLD,26,99,18);
+        DAYCHEST = new Location(WORLD,-9,99,15);
         CRATECHEST = new Location(WORLD,-14,155,-8);
         // Events
         getServer().getPluginManager().registerEvents(new LootBoxEvents(),this);
         getServer().getPluginManager().registerEvents(new OpenCrateEvent(),this);
         getServer().getPluginManager().registerEvents(new CrateGUI(),this);
         // Commandes
-        getCommand("crate").setExecutor(new LootCrates());
         getCommand("box").setExecutor(new LootBoxCmd());
-        // Tab
-        getCommand("crate").setTabCompleter(new LootCratesTAB());
         new CrateRegister();
         new Load();
         newDayUpdate = new NewDayUpdate().runTask();

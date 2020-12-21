@@ -2,6 +2,7 @@ package fr.milekat.cite_box.engines;
 
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.DateMilekat;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -36,7 +37,7 @@ public class NewDayUpdate {
      */
     public void setChestDay(String date) {
         try {
-            Connection connection = MainCore.getSQL().getConnection();
+            Connection connection = MainLibs.getSql();
             PreparedStatement q = connection.prepareStatement("SELECT `box_content` FROM `" + MainCore.SQLPREFIX +
                     "box` WHERE `box_date` = ?;");
             q.setString(1, date);

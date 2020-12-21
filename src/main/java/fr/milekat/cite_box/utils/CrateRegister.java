@@ -3,6 +3,7 @@ package fr.milekat.cite_box.utils;
 import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_box.obj.Crate;
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.ItemParser;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.md_5.bungee.api.ChatColor;
@@ -16,7 +17,7 @@ import java.util.TreeMap;
 
 public class CrateRegister {
     public CrateRegister() {
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         try {
             PreparedStatement q = connection.prepareStatement("SELECT * FROM `" + MainCore.SQLPREFIX + "crates`;");
             q.execute();

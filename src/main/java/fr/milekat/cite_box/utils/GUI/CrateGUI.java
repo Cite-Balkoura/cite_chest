@@ -4,6 +4,7 @@ import fr.milekat.cite_box.MainBox;
 import fr.milekat.cite_box.obj.Crate;
 import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_core.core.obj.Profil;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Tools;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -109,7 +110,7 @@ public class CrateGUI implements Listener {
                 crates.put(crateid, profil.getCrates().getOrDefault(crateid, 0) - 1);
                 profil.setCrates(crates);
                 try {
-                    Connection connection = MainCore.getSQL().getConnection();
+                    Connection connection = MainLibs.getSql();
                     PreparedStatement q = connection.prepareStatement(
                             "UPDATE `balkoura_player` SET `crates`=? WHERE `uuid` = ?;");
                     StringBuilder stringBuilder = new StringBuilder();
